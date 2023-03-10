@@ -11,7 +11,7 @@ function Card(props) {
   }`;
 
   const cardDeleteButtonClassName = `elements__delete-button ${
-    isOwn && "elements__delete-button_type_hidden"
+    !isOwn && "elements__delete-button_type_hidden"
   }`;
 
   function handleClick() {
