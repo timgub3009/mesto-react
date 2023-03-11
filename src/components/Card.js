@@ -31,20 +31,20 @@ function Card(props) {
       <img
         className="elements__image"
         src={props.link}
-        alt="Название картинки"
+        alt={props.name}
         onClick={handleClick}
       />
       <button
         className={cardDeleteButtonClassName}
         onClick={handleDeleteClick}
-      ></button>
+        />
       <div className="elements__info">
         <h2 className="elements__card-heading">{props.name}</h2>
         <div className="elements__like-container">
           <button
             className={cardLikeButtonClassName}
             onClick={handleLikeClick}
-          ></button>
+          />
           <p className="elements__like-counter">{props.likes}</p>
         </div>
       </div>

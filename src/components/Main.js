@@ -12,25 +12,22 @@ function Main(props) {
           <img
             className="profile__avatar"
             src={currentUser.avatar}
-            alt="Аватар профиля"
+            alt={`Аватар ${currentUser.name}`}
           />
           <button
             className="profile__avatar-edit-button"
             onClick={props.onEditAvatar}
-          ></button>
+          />
         </div>
         <div className="profile__info">
           <h1 className="profile__title">{currentUser.name}</h1>
           <button
             className="profile__edit-button"
             onClick={props.onEditProfile}
-          ></button>
+          />
           <p className="profile__subtitle">{currentUser.about}</p>
         </div>
-        <button
-          className="profile__add-button"
-          onClick={props.onAddPlace}
-        ></button>
+        <button className="profile__add-button" onClick={props.onAddPlace} />
       </section>
       <section className="elements">
         <ul className="elements__table">
