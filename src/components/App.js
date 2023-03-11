@@ -146,6 +146,9 @@ function App() {
     }
     if (isOpen) {
       document.addEventListener("mousedown", closeByOverlayClick);
+      return () => {
+        document.removeEventListener("mousedown", closeByOverlayClick);
+      };
     }
   }, [isOpen]);
 
