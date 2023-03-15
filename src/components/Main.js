@@ -1,6 +1,7 @@
 import Card from "./Card";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import React from "react";
+import Skeleton from "./Skeleton";
 
 function Main(props) {
   const currentUser = React.useContext(CurrentUserContext);
@@ -31,18 +32,20 @@ function Main(props) {
       </section>
       <section className="elements">
         <ul className="elements__table">
-          {props.cards.map((card) => (
-            <Card
-              key={card._id}
-              card={card}
-              link={card.link}
-              name={card.name}
-              likes={card.likes.length}
-              onCardClick={props.onCardClick}
-              onCardLike={props.onCardLike}
-              onCardDelete={props.onCardDelete}
-            />
-          ))}
+          {props.isImageLoading
+            ? [...new Array(6)].map((_, index) => <Skeleton key={index} />)
+            : props.cards.map((card) => (
+                <Card
+                  key={card._id}
+                  card={card}
+                  link={card.link}
+                  name={card.name}
+                  likes={card.likes.length}
+                  onCardClick={props.onCardClick}
+                  onCardLike={props.onCardLike}
+                  onCardDelete={props.onCardDelete}
+                />
+              ))}
         </ul>
       </section>
     </main>

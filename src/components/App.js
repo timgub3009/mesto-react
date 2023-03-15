@@ -23,12 +23,14 @@ function App() {
   const [isDeleteCardPopupOpen, setIsDeleteCardPopupOpen] =
     React.useState(false);
   const [isImagePopupOpen, setIsImagePopupOpen] = React.useState(false);
+  const [isImageLoading, setIsImageLoading] = React.useState(true);
 
   useEffect(() => {
     Promise.all([api.getUserInfo(), api.getInitialCards()])
       .then(([userData, card]) => {
         setCurrentUser(userData);
         setCards(card);
+        setIsImageLoading(false);
       })
       .catch((err) => {
         console.log(err);
@@ -201,6 +203,7 @@ function App() {
           onCardLike={handleCardLike}
           onCardDelete={handleDeleteConfirmation}
           cards={cards}
+          isImageLoading={isImageLoading}
         />
         <Footer />
 
