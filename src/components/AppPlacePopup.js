@@ -1,14 +1,16 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm";
-import useForm from "../hooks/useForm";
+import useFormValidation from "../hooks/useFormValidation";
 
 function AddPlacePopup(props) {
-  const { values, handleChange, setValues } = useForm({});
+  const { values, errors, handleChange, setValues, resetValidation, isValid } =
+    useFormValidation({});
 
   React.useEffect(() => {
+    resetValidation();
     const values = {};
     setValues(values);
-  }, [props.isOpen, setValues]);
+  }, [props.isOpen, setValues, resetValidation]);
 
   function handleSubmit(evt) {
     evt.preventDefault();
@@ -25,13 +27,16 @@ function AddPlacePopup(props) {
       formName={"card-form"}
       title={"Новое место"}
       submitText={props.isLoading ? "Создание..." : "Создать"}
+      isDisabled={!isValid}
     >
       <label htmlFor="title" className="popup__label">
         <input
           type="text"
           name="title"
           id="title"
-          className="popup__input popup__input_type_place"
+          className={`popup__input popup__input_type_place ${
+            errors.title && "popup__input_type_error"
+          }`}
           placeholder="Название"
           minLength="2"
           maxLength="30"
@@ -39,20 +44,32 @@ function AddPlacePopup(props) {
           value={values.title || ""}
           required
         />
-        <span id="title-error" className="popup__error"></span>
+        <span
+          id="title-error"
+          className={`popup__error ${errors.title && "popup__error_active"}`}
+        >
+          {errors.title || ""}
+        </span>
       </label>
       <label htmlFor="link" className="popup__label">
         <input
           type="url"
           name="link"
           id="link"
-          className="popup__input popup__input_type_link"
+          className={`popup__input popup__input_type_link ${
+            errors.link && "popup__input_type_error"
+          }`}
           placeholder="Ссылка на картинку"
           onChange={handleChange}
           value={values.link || ""}
           required
         />
-        <span id="link-error" className="popup__error"></span>
+        <span
+          id="link-error"
+          className={`popup__error ${errors.link && "popup__error_active"}`}
+        >
+          {errors.link || ""}
+        </span>
       </label>
     </PopupWithForm>
   );
